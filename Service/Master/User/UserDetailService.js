@@ -32,7 +32,45 @@ var routes = function () {
 })
    
          
-            
+//get user details by id
+router.route("/Getuserdeatils/:id").get(function (req, res) {
+    const userMst = datamodel.tbl_master_userdetails();
+    var param = {
+      where: { id: req.params.id},
+      include: { all: true, nested: true },
+    };
+    dataaccess.FindAll(userMst, param).then(
+      function (result) {
+        if (result != null) {
+          console.log("result",result);
+          res
+            .status(200)
+            .json({
+              success: true,
+              message: "Getting Records Successfully ",
+              Data: result,
+            });
+        }
+        else {
+          res.status(200).json({
+            success: false,
+            message: "No Record Found",
+            Data: null,
+          });
+        }
+      },
+      function (err) {
+        //dataconn.errorlogger("transaction", "M_TransferOrder", err);
+        res
+          .status(200)
+          .json({
+            success: false,
+            message: "User has no access of userdetails",
+            Data: null,
+          });
+      }
+    );
+  });            
 
 return router;
 };

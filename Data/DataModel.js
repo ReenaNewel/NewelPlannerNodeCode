@@ -18,6 +18,8 @@ class tbl_master_userdetails extends Model{}
 class tbl_task_details extends Model{}
 class tbl_task_assignee_details extends Model{}
 class tbl_timesheet_details extends Model{}
+class tbl_timesheet_approval extends Model{}
+class tbl_master_ra_mapping extends Model{}
 
 
 module.exports.tbl_timesheet_details = function () {
@@ -220,4 +222,54 @@ module.exports.tbl_task_assignee_details = function () {
     });
 
     return tbl_task_assignee_details;
+}
+
+
+
+
+module.exports.tbl_timesheet_approval = function () {
+    tbl_timesheet_approval.init({
+    id:{type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true,allowNull: false },
+    task_id:{ type: Sequelize.INTEGER, allowNull: true}, 
+    userid:{ type: Sequelize.INTEGER, allowNull: true}, 
+    ra_id:{ type: Sequelize.INTEGER, allowNull: true}, 
+    approval_status:{ type: Sequelize.INTEGER, allowNull: true},    
+    project_id :{ type: Sequelize.INTEGER, allowNull: true}, 
+    activity_id:{ type: Sequelize.INTEGER, allowNull: true}, 
+    approval_date:{ type: Sequelize.DATE, allowNull: true},
+    created_date:{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+    created_by:{ type: Sequelize.INTEGER, allowNull: true},
+    modified_date:{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+    modified_by:{ type: Sequelize.INTEGER, allowNull: true},
+    
+
+    }, {
+        sequelize,
+        modelName: 'tbl_timesheet_approval',
+        tableName: 'tbl_timesheet_approval'
+    });
+
+    return tbl_timesheet_approval;
+}
+module.exports.tbl_master_ra_mapping = function () {
+    tbl_master_ra_mapping.init({
+   
+
+    id :{ type: Sequelize.INTEGER,primaryKey:true,autoIncrement:true, allowNull: false },
+    userid:{ type: Sequelize.INTEGER, allowNull: true},
+    ra_id:{ type: Sequelize.INTEGER, allowNull: true},
+    isactive:{  type: Sequelize.BOOLEAN, defaultValue: true },
+    created_date: { type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW },
+    created_by : { type: Sequelize.INTEGER, allowNull: true },
+    modified_date : { type: Sequelize.DATE, allowNull: true },
+    modified_by : { type: Sequelize.INTEGER, allowNull: true },
+ 
+
+    }, {
+        sequelize,
+        modelName: 'tbl_master_ra_mapping',
+        tableName: 'tbl_master_ra_mapping'
+    });
+
+    return tbl_master_ra_mapping;
 }

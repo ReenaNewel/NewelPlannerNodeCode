@@ -54,6 +54,7 @@ router.route('/CreateNewTask')
                 efforts: req.body.efforts,
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
+                status:req.body.status,
                 attachment: req.body.attachment,
                 comments: req.body.comments,
              };
@@ -118,7 +119,8 @@ router.route('/UpdateTask')
                 efforts: req.body.efforts,
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
-                // attachment: req.body.attachment,
+                status:req.body.status,
+                attachment: req.body.attachment,
                 comments: req.body.comments,
              };
             // console.log("values",values)

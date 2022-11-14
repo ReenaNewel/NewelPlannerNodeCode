@@ -65,6 +65,8 @@ app.use("/UserDetails", UserDetailService);
 var TimeSheetService = require('./Service/TimeSheet/timeSheetService')();
 app.use("/timesheet", TimeSheetService);
 
+var RaMappingService = require('./Service/RAmapping/RamappingService')();
+app.use("/RAMapping", RaMappingService);
 
 
 
@@ -660,7 +662,7 @@ app.get('/holiday', (req, res)=>{
 app.get('/allholiday', (req, res)=>{
     var flag = req.body.flag
      
-    client.query(` select typeid,name from tbl_general_master where typeid not in(select holiday_id from tbl_master_holiday)
+    client.query(`select typeid,name from tbl_general_master where typeid not in(select holiday_id from tbl_master_holiday)
     and parentid=16`, (err, results)=>{
         if(!err){
             if (results != null )  {
