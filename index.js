@@ -68,6 +68,8 @@ app.use("/timesheet", TimeSheetService);
 var RaMappingService = require('./Service/RAmapping/RamappingService')();
 app.use("/RAMapping", RaMappingService);
 
+var MenuService = require('./Service/menu/MenuService')();
+app.use("/Menu", MenuService);
 
 
 

@@ -145,6 +145,7 @@ router.route("/CreateTimesheet").post(function(req, res) {
         modified_date :req.body.modified_date ,
         modified_by : req.body.modified_by,
     };
+    console.log('values',values)
     dataaccess.Create(timesheet, values).then(
         function(result) {
             if (result != null) {

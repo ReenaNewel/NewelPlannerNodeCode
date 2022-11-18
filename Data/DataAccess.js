@@ -1,4 +1,5 @@
 /// FindAll function to fetch list data with filtered filteredparameters as param
+
 module.exports.FindAll = function (model, param)
 {
     return model.findAll (param);

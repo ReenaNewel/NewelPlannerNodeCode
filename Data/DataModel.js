@@ -19,13 +19,18 @@ class tbl_task_details extends Model{}
 class tbl_task_assignee_details extends Model{}
 class tbl_timesheet_details extends Model{}
 class tbl_timesheet_approval extends Model{}
+
 class tbl_master_ra_mapping extends Model{}
+
+class tbl_ui_Rolemap extends Model{}
+class tbl_ui_mst extends Model{}
+class tbl_master_role extends Model{}
+class tbl_userproject_mapping extends Model{}
 
 
 module.exports.tbl_timesheet_details = function () {
     tbl_timesheet_details.init({
    
-
     id :{ type: Sequelize.INTEGER,primaryKey:true,autoIncrement:true, allowNull: false },
     projectid :{ type: Sequelize.INTEGER, allowNull: true },
     taskid :{ type: Sequelize.INTEGER, allowNull: true },
@@ -273,3 +278,99 @@ module.exports.tbl_master_ra_mapping = function () {
 
     return tbl_master_ra_mapping;
 }
+module.exports.tbl_userproject_mapping =function(){
+    tbl_userproject_mapping.init({
+        id :{type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true,allowNull: false },
+        projectid :{ type: Sequelize.INTEGER, allowNull: true},
+        userid :{ type: Sequelize.INTEGER, allowNull: true},
+        roleid :{ type: Sequelize.INTEGER, allowNull: true},
+        isactive:{  type: Sequelize.INTEGER, defaultValue: 1},        
+        created_by :{ type: Sequelize.INTEGER, allowNull: true}, 
+        created_date :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+        modified_by :{ type: Sequelize.INTEGER, allowNull: true}, 
+        modified_date :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+           
+        }, {
+            sequelize,
+            modelName: 'tbl_userproject_mapping',
+            tableName: 'tbl_userproject_mapping'
+        });
+    
+        return tbl_userproject_mapping;
+
+    }
+
+module.exports.tbl_master_role =function(){
+    tbl_master_role.init({
+        id :{type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true,allowNull: false },
+        name: { type: Sequelize.STRING(100), allowNull: true},
+        isactive:{  type: Sequelize.BOOLEAN, defaultValue: true},        
+        created_by :{ type: Sequelize.INTEGER, allowNull: true}, 
+        created_date :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+        modified_by :{ type: Sequelize.INTEGER, allowNull: true}, 
+        modified_date :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+           
+        }, {
+            sequelize,
+            modelName: 'tbl_master_role',
+            tableName: 'tbl_master_role'
+        });
+    
+        return tbl_master_role;
+
+    }
+
+module.exports.tbl_ui_mst =function(){
+    tbl_ui_mst.init({
+        id :{type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true,allowNull: false },
+        parentid :{ type: Sequelize.INTEGER, allowNull: true}, 
+        title: { type: Sequelize.STRING(100), allowNull: true},
+        path :{ type: Sequelize.STRING(2000), allowNull: true},
+        icon: { type: Sequelize.STRING(2000), allowNull: true},
+        cssclass : { type: Sequelize.STRING(2000), allowNull: true},
+        sequence :{ type: Sequelize.INTEGER, allowNull: true}, 
+        isactive :{ type: Sequelize.INTEGER, allowNull: true}, 
+        ischild :{ type: Sequelize.INTEGER, allowNull: true}, 
+        createdby :{ type: Sequelize.INTEGER, allowNull: true}, 
+        createddate :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+        modifiedby :{ type: Sequelize.INTEGER, allowNull: true}, 
+        modifieddate :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+           
+        }, {
+            sequelize,
+            modelName: 'tbl_ui_mst',
+            tableName: 'tbl_ui_mst'
+        });
+    
+        return tbl_ui_mst;
+
+    }
+
+
+module.exports.tbl_ui_Rolemap =function(){
+    tbl_ui_Rolemap.init({
+    id:{type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true,allowNull: false },
+    UI_id :{ type: Sequelize.INTEGER, allowNull: true}, 
+    roleid :{ type: Sequelize.INTEGER, allowNull: true}, 
+    view :{ type: Sequelize.INTEGER, allowNull: true}, 
+    add :{ type: Sequelize.INTEGER, allowNull: true}, 
+    edit :{ type: Sequelize.INTEGER, allowNull: true}, 
+    export :{ type: Sequelize.INTEGER, allowNull: true}, 
+    upload :{ type: Sequelize.INTEGER, allowNull: true}, 
+    isactive :{ type: Sequelize.INTEGER, allowNull: true}, 
+    createdby :{ type: Sequelize.INTEGER, allowNull: true}, 
+    createddate:{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+    modifiedby :{ type: Sequelize.INTEGER, allowNull: true}, 
+    modifieddate:{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+    createdbyroleid :{ type: Sequelize.INTEGER, allowNull: true},
+    modifiedbyroleid :{ type: Sequelize.INTEGER, allowNull: true}       
+    
+        }, {
+            sequelize,
+            modelName: 'tbl_ui_Rolemap',
+            tableName: 'tbl_ui_Rolemap'
+        });
+    
+        return tbl_ui_Rolemap;
+
+    }
