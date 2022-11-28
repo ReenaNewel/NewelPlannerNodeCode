@@ -172,7 +172,8 @@ app.post('/AuthenticateUser', function(req, res) {
 	if (name && password) {
      console.log("in if codition");
         // let insertQuery =`SELECT * FROM tbl_master_userdetails WHERE name = '${name}' AND password ='${password}' `       
-        let insertQuery =`SELECT * FROM tbl_master_userdetails WHERE (name = '${name}' OR EmailId ='${name}') AND password ='${password}' `      
+        let insertQuery =`SELECT * FROM tbl_master_userdetails WHERE 
+        (name = LOWER('${name}') OR lower(EmailId) =LOWER('${name}')) AND password =LOWER('${password}') `      
 		client.query(insertQuery,function(error, results, fields) {
             // if (error) throw error;
     
@@ -194,7 +195,7 @@ app.post('/AuthenticateUser', function(req, res) {
 //  app.use(bodyParser.json());
 
 app.post('/leave', (req, res)=> {
-    const leave_col = req.body;
+    const leave_col = req.body; 
 
     console.log(leave_col);
     let insertQuery = `insert into tbl_master_leave( name, isactive) 

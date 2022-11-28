@@ -55,7 +55,7 @@ router.route('/CreateNewTask')
                 startdate: req.body.startdate,
                 enddate: req.body.enddate,
                 status:req.body.status,
-                attachment: req.body.attachment,
+                // attachment: req.body.attachment,
                 comments: req.body.comments,
              };
             // console.log("values",values)
@@ -210,6 +210,76 @@ router.route('/CreateTaskAssigneeDetails')
                 });
         });
     //task_assigneee_details---End   
+
+router.route('/GetProjectNameByuser')
+    .post(function (req, res) {
+        try {
+            
+        var querytext = 'SELECT "GetProjectNameByUserId"(:p_active,:p_userid,:p_ref); FETCH ALL IN "abc"';
+          
+        var param = {
+            replacements: {
+                p_active: true,
+                p_userid:req.body.p_userid,
+                p_ref: 'abc'
+            },
+            type: connect.sequelize.QueryTypes.SELECT
+        }
+         connect.sequelize
+        .query(querytext,param)
+        .then(function (result) {
+            result.shift();
+            console.log('result...',result)
+            res.status(200).json({
+                Success: true,
+                Message: "Get all user Details successfully",
+                Data: result
+            });
+        }, function (err) {
+            dataconn.errorlogger('EmployeeProjectService', 'GetProjectNameByuser', err);
+            res.status(200).json({ Success: false, Message: ' NewTask table API failed.', Data: null });
+        });
+    }catch(err)    {
+        dataconn.errorlogger('EmployeeProjectService', 'GetProjectNameByuser', err);
+        res.status(200).json({ Success: false, Message: '  table API failed.', Data: null });
+    }
+});
+
+// for task details by specific user
+router.route('/GetTaskDetailsByuser')
+    .post(function (req, res) {
+        try {
+            
+        var querytext = 'SELECT "GetTaskDetailsByUserId"(:p_active,:p_userid,:p_projectid,:p_ref); FETCH ALL IN "abc"';
+          
+        var param = {
+            replacements: {
+                p_active: true,
+                p_userid:req.body.p_userid,
+                p_projectid:req.body.p_projectid,
+                p_ref: 'abc'
+            },
+            type: connect.sequelize.QueryTypes.SELECT
+        }
+         connect.sequelize
+        .query(querytext,param)
+        .then(function (result) {
+            result.shift();
+            console.log('result...',result)
+            res.status(200).json({
+                Success: true,
+                Message: "Get all Task Details successfully",
+                Data: result
+            });
+        }, function (err) {
+            dataconn.errorlogger('EmployeeProjectService', 'GetTaskDetailsByuser', err);
+            res.status(200).json({ Success: false, Message: ' NewTask table API failed.', Data: null });
+        });
+    }catch(err)    {
+        dataconn.errorlogger('EmployeeProjectService', 'GetTaskDetailsByuser', err);
+        res.status(200).json({ Success: false, Message: '  table API failed.', Data: null });
+    }
+});
 
 
     return router;

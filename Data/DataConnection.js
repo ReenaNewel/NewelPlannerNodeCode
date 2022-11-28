@@ -17,7 +17,7 @@ module.exports.CheckConnection = function (res) {
 /// CreateTable function used to create Database tables using API
 module.exports.CreateTable = function (res) {
 
-    datamodel.ErrorLog();
+    datamodel.Error_Log();
     // datamodel.tbl_master_holiday();
    
     connect.sequelize.sync()
@@ -37,7 +37,7 @@ module.exports.errorlogger = function (servicename, functionname, errorobj) {
         ErrorObject: err
     };
 
-    dataaccess.Create(datamodel.ErrorLog(), values)
+    dataaccess.Create(datamodel.Error_Log(), values)
         .then(function (result) {
             console.log(JSON.stringify(result));
         }, function (err) {

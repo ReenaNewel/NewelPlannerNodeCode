@@ -324,17 +324,17 @@ console.log("querytext",querytext);
             Success: true,
             Message: "Get all timesheet Details successfully",
             Data: result
-        });
+        }); 
     }, function (err) {
         console.log(err);
         // dataconn.ARC_Errorlogger('homepageService', 'getConfirmDetails', err);
-        res.status(200).json({ Success: false, Message: ' timesheet Master table API failed.', Data: null });
+        res.status(200).json({ Success: false, Message: ' timesheet Master table API f ailed.', Data: null });
     });
 }catch(err)    {
     res.status(200).json({ Success: false, Message: ' timesheet Master table API failed.', Data: null });
-} 
-});
-
+}  
+}); 
+ 
     return router;
 };
 

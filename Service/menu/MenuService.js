@@ -33,6 +33,43 @@ var routes = function () {
             res.status(200).json({
     
                 Success: true,
+                Message: "Get all Details successfully",
+                Data: result
+            });
+        }, function (err) {
+            console.log(err);
+            //  dataconn.ARC_Errorlogger('homepageService', 'getConfirmDetails', err);
+            res.status(200).json({ Success: false, Message: ' Geeting Menu API failed.', Data: null });
+        });
+    }catch(err)    {
+        res.status(200).json({ Success: false, Message: ' Geeting Menu API failed.', Data: null });
+    } 
+    });
+
+    router.route('/GetPrimeMenubyRoleId/:Id')
+    .get(function (req, res) {
+        
+        try {
+            // let user= req.body;
+            // let param ={}
+            
+        var querytext = `SELECT "GetPrimeMenuListByRoleId"('${req.params.Id}','abc'); FETCH ALL IN "abc"`;
+        console.log("querytextmenu",querytext);
+        var param = {
+            replacements: {
+                p_active: true,
+                p_ref: 'abc'
+            },
+            type: connect.sequelize.QueryTypes.SELECT
+        }
+        connect.sequelize
+        .query(querytext,param)
+        .then(function (result) {
+            console.log("result",result);
+            result.shift();
+            res.status(200).json({
+    
+                Success: true,
                 Message: "Get all timesheet Details successfully",
                 Data: result
             });
@@ -45,6 +82,7 @@ var routes = function () {
         res.status(200).json({ Success: false, Message: ' timesheet Master table API failed.', Data: null });
     } 
     });
+
 
     router.route('/GetAllMenuById/:id')
     .get(function (req, res) {

@@ -26,6 +26,31 @@ class tbl_ui_Rolemap extends Model{}
 class tbl_ui_mst extends Model{}
 class tbl_master_role extends Model{}
 class tbl_userproject_mapping extends Model{}
+class tbl_menu_ui_mst extends Model{}
+class Error_Log extends Model{}
+
+
+
+module.exports.Error_Log = function () {
+    Error_Log.init({
+    id :{ type: Sequelize.BIGINT,primaryKey:true,autoIncrement:true},
+    servicename:{ type: Sequelize.STRING(1000), allowNull: true},
+    functionname:{ type: Sequelize.STRING(1000), allowNull: true},
+    errordetails:{  type: Sequelize.TEXT,allowNull: true },
+    Transactionid: { type: Sequelize.STRING(100), allowNull: true},
+    inputvalue : { type: Sequelize.STRING(500), allowNull: true },
+    Errorsubject : { type: Sequelize.STRING(1000), allowNull: true },
+    created_by : { type: Sequelize.STRING(500), allowNull: true },
+    createddate : { type: Sequelize.DATE, allowNull: true,defaultValue:sequelize.NOW}
+
+    }, {
+        sequelize,
+        modelName: 'Error_Log',
+        tableName: 'Error_Log'
+    });
+
+    return Error_Log;
+}
 
 
 module.exports.tbl_timesheet_details = function () {
@@ -345,6 +370,33 @@ module.exports.tbl_ui_mst =function(){
         return tbl_ui_mst;
 
     }
+
+
+    module.exports.tbl_menu_ui_mst =function(){
+        tbl_menu_ui_mst.init({
+            id :{type: Sequelize.BIGINT, primaryKey: true, autoIncrement: true,allowNull: false },
+            parentid :{ type: Sequelize.INTEGER, allowNull: true}, 
+            name: { type: Sequelize.STRING(100), allowNull: true},
+            url :{ type: Sequelize.STRING(2000), allowNull: true},
+            iconComponent: { type: Sequelize.STRING(2000), allowNull: true},
+            cssclass : { type: Sequelize.STRING(2000), allowNull: true},
+            sequence :{ type: Sequelize.INTEGER, allowNull: true}, 
+            isactive :{ type: Sequelize.INTEGER, allowNull: true}, 
+            ischild :{ type: Sequelize.INTEGER, allowNull: true}, 
+            createdby :{ type: Sequelize.INTEGER, allowNull: true}, 
+            createddate :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+            modifiedby :{ type: Sequelize.INTEGER, allowNull: true}, 
+            modifieddate :{ type: Sequelize.DATE, allowNull: true, defaultValue: Sequelize.NOW},
+               
+            }, {
+                sequelize,
+                modelName: 'tbl_menu_ui_mst',
+                tableName: 'tbl_menu_ui_mst'
+            });
+        
+            return tbl_menu_ui_mst;
+    
+        }
 
 
 module.exports.tbl_ui_Rolemap =function(){
